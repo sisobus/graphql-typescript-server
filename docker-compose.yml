@@ -1,0 +1,38 @@
+version: "2.0"
+services:
+  prisma:
+    image: prismagraphql/prisma:1.25
+    restart: always
+    ports:
+    - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        managementApiSecret: thisismysecretapikey
+        databases:
+          default:
+            connector: postgres
+            host: host.docker.internal
+            database: prisma
+            port: 5432
+            user: prisma
+            password: prisma
+            migrations: true
+    volumes_from:
+      - postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma 
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres:
