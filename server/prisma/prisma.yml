@@ -17,6 +17,8 @@ generate:
 hooks:
   post-deploy:
     - prisma generate
+    - npx nexus-prisma-generate --client ./src/generated/prisma-client --output ./src/generated/nexus-prisma
+
 
 # If specified, the `secret` must be used to generate a JWT which is attached
 # to the `Authorization` header of HTTP requests made against the Prisma API.

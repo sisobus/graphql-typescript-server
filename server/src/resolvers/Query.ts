@@ -1,29 +1,14 @@
-import { getUserId, Context } from '../utils'
+import { queryType } from 'nexus'
+import {
+  me,
+  user,
+  users,
+} from './queries'
 
-export const Query = {
-  feed(parent, args, ctx: Context) {
-    return ctx.prisma.posts({ where: { published: true } })
+export const Query = queryType({
+  definition(t) {
+    t.field('me', me)
+    t.field('user', user)
+    t.list.field('users', users)
   },
-
-  drafts(parent, args, ctx: Context) {
-    const id = getUserId(ctx)
-
-    const where = {
-      published: false,
-      author: {
-        id,
-      },
-    }
-
-    return ctx.prisma.posts({ where })
-  },
-
-  post(parent, { id }, ctx: Context) {
-    return ctx.prisma.post({ id })
-  },
-
-  me(parent, args, ctx: Context) {
-    const id = getUserId(ctx)
-    return ctx.prisma.user({ id })
-  },
-}
+})

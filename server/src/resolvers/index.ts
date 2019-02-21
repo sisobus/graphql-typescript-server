@@ -1,17 +1,11 @@
+import { AuthPayload, User } from './models'
+import { Mutation } from './Mutation'
 import { Query } from './Query'
-import { Subscription } from './Subscription'
-import { auth } from './Mutation/auth'
-import { post } from './Mutation/post'
-import { User } from './User'
-import { Post } from './Post'
 
-export default {
+export const resolvers = {
+  AuthPayload,
+  Mutation,
   Query,
-  Mutation: {
-    ...auth,
-    ...post,
-  },
-  Subscription,
   User,
-  Post,
 }
+
