@@ -1,1 +1,1 @@
-PRISMA_MANAGEMENT_API_SECRET=thisismysecretkey prisma deploy
+PRISMA_MANAGEMENT_API_SECRET=thisismysecretapikey prisma deploy
